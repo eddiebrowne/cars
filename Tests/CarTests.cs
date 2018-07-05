@@ -39,12 +39,13 @@ namespace Tests
         public void Should_Update_Position_When_Clock_Cycles()
         {
             // Arrange
-            _car.Accelerate();
-            var expected = new Position(9, 1);
-            const int precision = 1;
+            var car = new Car();
+            car.Accelerate();
+            var expected = new Position(9, Lane.Left);
 
-            // Act			    
-            var actual = _car.UpdatePosition(precision);
+            // Act
+            car.Drive();
+            var actual = car.Position;
 
             // Assert
             Assert.Equal(expected, actual);

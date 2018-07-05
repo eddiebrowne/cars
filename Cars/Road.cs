@@ -22,7 +22,7 @@ namespace Cars
         // properties
         public int SpeedLimit { get; }
         
-        private readonly Dictionary<Position, Road> _intersections;
+        private readonly Dictionary<double, Road> _intersections;
         
         public Road()
         {
@@ -32,17 +32,17 @@ namespace Cars
             LaneWidth = DEFAULT_LANE_WIDTH;
             SpeedLimit = DEFAULT_SPEED_LIMIT;
             RoadId = new RoadId();
-            _intersections = new Dictionary<Position, Road>();
+            _intersections = new Dictionary<double, Road>();
         }
 
         public void AddIntersection(Position position, Road road)
         {
-            _intersections.Add(position, road);
+            _intersections.Add(position.Point, road);
         }
 
         public Road ChangeRoad(Position position)
         {
-            return _intersections[position];
+            return _intersections[position.Point];
         }
     }
 }

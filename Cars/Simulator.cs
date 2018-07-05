@@ -12,7 +12,7 @@ namespace Cars
 
         // time
         private double _t;
-        public int Precision { get; }
+        public static int Precision { get; private set; }
 
         // roads
         private List<Car> _cars;
@@ -24,10 +24,11 @@ namespace Cars
             Precision = 1;
         }
 
-        public Simulator(List<Car> cars)
+        public Simulator(List<Car> cars, int precision)
         {
             _t = 0;
             _cars = cars;
+            Precision = precision;
         }
 
         public bool RunSimulation(int seconds)
@@ -50,7 +51,7 @@ namespace Cars
             }
         }
 
-        public void AddRoad(Car car)
+        public void AddCar(Car car)
         {
             _cars.Add(car);
         }

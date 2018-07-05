@@ -1,27 +1,25 @@
+using System.Collections.Generic;
 using Cars;
 using Xunit;
 
 namespace Tests
 {
 	public class SimulatorTests {
-
-		private readonly Simulator _simulation = new Simulator();
-
 		[Fact]
 		public void Should_Simulate_A_Car_Driving_Down_A_Simple_Road() 
 		{
 			// Arrange
 			var road = new Road();
-			_simulation.AddRoad(road);
-
-			var car = new Car(new Position(0, 0, road.RoadId), speed: 88);
+			var initialPosition = new Position(0);
+			var expected = new Position(road.Length);
+			var car = new Car(road, initialPosition, expected, speed: 88);
+			var simulation = new Simulator();
+			simulation.AddCar(car);
 			
 			const int runningTime = 60; // seconds
 
-			var expected = new Position(5280, 0, road.RoadId);
-		
 			// Act
-			_simulation.RunSimulation(runningTime);
+			simulation.RunSimulation(runningTime);
 		
 			var actual = car.Position;
 		
@@ -34,17 +32,15 @@ namespace Tests
 		{
 			// Arrange
 			var road = new Road();
-			_simulation.AddRoad(road);
-
-			var car = new Car(new Position(0, 0, road.RoadId), speed: 88);
+			var initialPosition = new Position(0);
+			var expected = new Position(road.Length);
+			var car = new Car(road, initialPosition, expected, speed: 88);
+			var simulation = new Simulator(new List<Car> {car}, precision: 20);
 			
 			const int runningTime = 60; // seconds
-			const int precision = 100;
-		
-			var expected = new Position(5280, 0, road.RoadId);
 		
 			// Act
-			_simulation.RunSimulation(runningTime);
+			simulation.RunSimulation(runningTime);
 		
 			var actual = car.Position;
 		

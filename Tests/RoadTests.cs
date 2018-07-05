@@ -6,28 +6,20 @@ namespace Tests
 {
     public class RoadTests
     {
-        private readonly Road _road = new Road();
-        
         [Fact]
-        public void Should_Update_Cars_When_Clock_Cycles()
+        public void Should_Change_Road_At_Intersection()
         {
             // Arrange
-            var car = new Car();
-            car.Accelerate(); // car is now going 9 feet per second
-		
-            _road.AddCar(car);
-            var expected = new Position(car.Position.Point + car.Speed, car.Position.Lane, _road.RoadId);				
-		
-            const int precision = 1;
-		
-            // Act
-            _road.Update(precision);
+            var road = new Road();
+            var expected = new Road();
+            var position = new Position(Math.Floor(road.Length / 2.0), Lane.Left);
+            road.AddIntersection(position, expected);
 
-            var actual = _road.Cars()[0].Position;
+            // Act
+            var actual = road.ChangeRoad(position);
 		
             // Assert		
             Assert.Equal(expected, actual);
         }
-
     }
 }

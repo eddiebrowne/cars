@@ -5,12 +5,14 @@ namespace Cars
     public class Position 
     {
         public double Point { get; private set; }
-        public int Lane { get; set; }
+        public Lane Lane { get; set; }
+        public bool IsIntersection { get; private set; }
 
-        public Position(double point, int lane)
+        public Position(double point, Lane lane = Lane.Left, bool isIntersection = false)
         {
             Point = point;
             Lane = lane;
+            IsIntersection = isIntersection;
         }
 
         public void Move(double distance)
