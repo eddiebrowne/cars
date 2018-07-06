@@ -12,7 +12,8 @@ namespace Cars
 
         // time
         private double _t;
-        public static int Precision { get; private set; }
+
+        public static int Precision { get; private set; } = 1;
 
         // roads
         private List<Car> _cars;

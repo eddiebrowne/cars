@@ -16,7 +16,7 @@ namespace Tests
             road.AddIntersection(position, expected);
 
             // Act
-            var actual = road.ChangeRoad(position);
+            var actual = road.ChangeRoad(new Car(), position);
 		
             // Assert		
             Assert.Equal(expected, actual);

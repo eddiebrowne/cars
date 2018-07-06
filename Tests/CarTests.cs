@@ -17,7 +17,7 @@ namespace Tests
             var actual = _car.Accelerate();
 
             //Assert
-            Assert.Equal(expected, actual, 2);
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
@@ -32,7 +32,7 @@ namespace Tests
             var actual = _car.Deccelerate();
 
             // Assert
-            Assert.Equal(expected, actual, 2);
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
@@ -46,6 +46,50 @@ namespace Tests
             // Act
             car.Drive();
             var actual = car.Position;
+
+            // Assert
+            Assert.Equal(expected, actual);
+        }
+        
+        [Fact]
+        public void Should_Deccelerate_When_Approaching_Car()
+        {
+            // Arrange
+            var road = new Road();
+            var target = new Car(road, new Position(18, Lane.Left), new Position(road.Length));
+
+            var car = new Car(road, new Position(11, Lane.Left), new Position(road.Length));
+            car.Accelerate();
+            
+            const int expected = 0;
+
+            // Act
+            car.Drive();
+            
+            var actual = car.Speed;
+
+            // Assert
+            Assert.Equal(expected, actual);
+        }
+        
+        [Fact]
+        public void Should_Change_Road_At_Intersection()
+        {
+            // Arrange
+            var road = new Road();
+            var intersection = new Road();
+            var destination = new Position(18, Lane.Left, isIntersection: true);
+            road.AddIntersection(destination, intersection);
+
+            var car = new Car(road, new Position(11, Lane.Left), destination);
+            car.Accelerate();
+            
+            var expected = intersection.RoadId.Value;
+
+            // Act
+            car.Drive();
+            
+            var actual = car.CurrentRoad.RoadId.Value;
 
             // Assert
             Assert.Equal(expected, actual);

@@ -18,6 +18,7 @@ namespace Cars
         public void Move(double distance)
         {
             Point = Point + distance;
+            
         }
         
         public override bool Equals(object obj) {

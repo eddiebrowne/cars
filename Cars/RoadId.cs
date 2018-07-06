@@ -3,11 +3,11 @@ namespace Cars
     public class RoadId
     {
         private static int _idCounter = 0;
-        private int Id { get; }
+        public int Value { get; }
 
         public RoadId()
         {
-            Id = _idCounter++;
+            Value = _idCounter++;
         }
 
     }
